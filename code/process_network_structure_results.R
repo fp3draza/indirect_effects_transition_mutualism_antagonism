@@ -3,9 +3,9 @@ require(dplyr)
 require(FactoMineR)
 
 # load data
-load('~/mutualistic_antagonistic_indirect_effects/output/network_structure/structuretable.mut.RData')
-load('~/mutualistic_antagonistic_indirect_effects/output/network_structure/structuretable.anta.RData')
-load('~/mutualistic_antagonistic_indirect_effects/output/network_structure/degreetab.RData')
+load('~/indirect_effects_transition_mutualism_antagonism/output/network_structure/structuretable.mut.RData')
+load('~/indirect_effects_transition_mutualism_antagonism/output/network_structure/structuretable.anta.RData')
+load('~/indirect_effects_transition_mutualism_antagonism/output/network_structure/degreetab.RData')
 
 # Bind data
 network_structure <- rbind(strtab, strtab.anta)
@@ -53,4 +53,4 @@ network_structure <- network_structure %>% mutate(pca_observed_values = as.vecto
                              pca_vardegree = as.vector(pca_vardegree$ind$coord[,1]),
                              pca_vardegree_by_network_type = c(as.vector(pca_vardegree_mutualistic$ind$coord[,1]), as.vector(pca_vardegree_antagonistic$ind$coord[,1])))
 # Save data to file
-write.csv(network_structure, '~/mutualistic_antagonistic_indirect_effects/results/network_structure.csv')
+write.csv(network_structure, '~/indirect_effects_transition_mutualism_antagonism/results/network_structure.csv')
