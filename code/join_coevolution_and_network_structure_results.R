@@ -3,17 +3,17 @@ require(dplyr)
 require(data.table)
 
 # Load processed data
-specialist_antagonistic_data <- fread('~/mutualistic_antagonistic_indirect_effects/results/antagonistic_results_specialist.csv')
+specialist_antagonistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/antagonistic_results_specialist.csv')
 specialist_antagonistic_data <- specialist_antagonistic_data[,2:ncol(specialist_antagonistic_data)]
-generalist_antagonistic_data <- fread('~/mutualistic_antagonistic_indirect_effects/results/antagonistic_results_generalist.csv')
+generalist_antagonistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/antagonistic_results_generalist.csv')
 generalist_antagonistic_data <- generalist_antagonistic_data[,2:ncol(generalist_antagonistic_data)]
-random_antagonistic_data <- fread('~/mutualistic_antagonistic_indirect_effects/results/antagonistic_results_random.csv')
+random_antagonistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/antagonistic_results_random.csv')
 random_antagonistic_data <- random_antagonistic_data[,2:ncol(random_antagonistic_data)]
-specialist_mutualistic_data <- fread('~/mutualistic_antagonistic_indirect_effects/results/mutualistic_results_specialist.csv')
+specialist_mutualistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/mutualistic_results_specialist.csv')
 specialist_mutualistic_data <- specialist_mutualistic_data[,2:ncol(specialist_mutualistic_data)]
-generalist_mutualistic_data <- fread('~/mutualistic_antagonistic_indirect_effects/results/mutualistic_results_generalist.csv')
+generalist_mutualistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/mutualistic_results_generalist.csv')
 generalist_mutualistic_data <- generalist_mutualistic_data[,2:ncol(generalist_mutualistic_data)]
-random_mutualistic_data <- fread('~/mutualistic_antagonistic_indirect_effects/results/mutualistic_results_random.csv')
+random_mutualistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/mutualistic_results_random.csv')
 random_mutualistic_data <- random_mutualistic_data[,2:ncol(random_mutualistic_data)]
 
 # Bind data
@@ -34,11 +34,11 @@ colnames(complete_data) <- c('network_name', 'network_type', 'anta_ratio', 'sequ
 
 
 # Load network structure data
-network_structure_data <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_structure.csv')
+network_structure_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_structure.csv')
 network_structure_data <- network_structure_data[,2:ncol(network_structure_data)]
 
 # JOIN STATEMENT
 complete_data <- complete_data %>% left_join(network_structure_data)
 
 # Write file
-write.csv(complete_data, '~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+write.csv(complete_data, '~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
