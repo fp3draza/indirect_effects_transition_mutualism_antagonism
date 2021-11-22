@@ -15,7 +15,7 @@ color_pal <- c("#0072B2", "#D55E00")
 ###################
 # figure S1
 # load network data
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist'),
@@ -24,7 +24,7 @@ network_scale_results_for_plots <- network_scale_results %>%
 
 
 # summarise data
-full_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+full_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 full_results <- full_results[,2:ncol(full_results)]
 full_results_mutualistic <- full_results %>% na.omit() %>% 
   filter(network_type == 'antagonistic_network', sequence  %in% c('generalist','specialist')) %>% 
@@ -78,7 +78,7 @@ figure_S1 <- ggarrange(figure_S1a, figure_S1b, figure_S1c,figure_S1d,  # list of
 ###################
 # figure S2
 
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist'),
@@ -116,7 +116,7 @@ figure_S2 <- ggarrange(figure_S2a, figure_S2b, # list of plots
 # figure S3
 
 # Read data and wrangle
-network_scale_results <- read.csv("~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv",header = T,row.names = 1)
+network_scale_results <- read.csv("~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv",header = T,row.names = 1)
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist'),
@@ -170,7 +170,7 @@ figure_S3 <- ggarrange(figure_S3a, figure_S3b, # list of plots
 ###################
 # figure S4
 
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist')) %>% 
@@ -205,7 +205,7 @@ figure_S4 <- ggarrange(figure_S4a, figure_S4b, # list of plots
 # figure S5
 
 # Read data and wrangle
-network_scale_results <- read.csv("~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv",header = T,row.names = 1)
+network_scale_results <- read.csv("~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv",header = T,row.names = 1)
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist')) %>% 
@@ -257,7 +257,7 @@ figure_S5 <- ggarrange(figure_S5a, figure_S5b, # list of plots
 ###################
 # figure S6
 # Load data
-full_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+full_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 full_results <- full_results[,2:ncol(full_results)]
 full_results_mutualistic <- full_results %>% na.omit() %>% 
   filter(network_type == 'antagonistic_network', sequence  %in% c('generalist','specialist')) %>% 
@@ -277,9 +277,9 @@ figure_S6 <- ggplot(data = full_results_mutualistic_summary, aes(x = as.factor(a
 # Figure S7 & S8
 
 # Load data
-species_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/species_scale_results_summary.csv')
+species_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/species_scale_results_summary.csv')
 species_scale_results <- species_scale_results[,2:ncol(species_scale_results)]
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_slim <- network_scale_results %>% select(network_name, network_matching_all_species,
                                                                network_type, anta_ratio, sequence)
