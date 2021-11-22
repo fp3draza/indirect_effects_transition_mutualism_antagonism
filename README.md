@@ -9,7 +9,7 @@ This repository contains the code and data used to perform the analyses describe
 
 The networks contained in the data directory were downloaded from the [web of life](http://www.web-of-life.es/) online repository. All code was run in `R` version 4.0.2.
 
-To replicate analyses, clone this repository and place it in your home directory. All paths specified in the scripts assume that the repository is at the '~/' level. 
+To replicate analyses, clone this repository and place it in your home directory. All paths specified in the scripts assume that the repository is at the '~/' level. To catch the output of the scripts, create a repository called `results` and `output` at the same level as `code` and `data`.
 
 ### `code` subdirectory
 
