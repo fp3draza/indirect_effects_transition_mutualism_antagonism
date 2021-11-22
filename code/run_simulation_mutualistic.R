@@ -31,7 +31,7 @@ run_simulations_on_HPC = function(m,a,seq,network_directory,realanta=F){
   #critical mismatch of predator-prey interaction
   sigma=10
   # Define folder to store results
-  folder = '~/mutualistic_antagonistic_indirect_effects/output/mutualistic_to_antagonistic/'
+  folder = '~/indirect_effects_transition_mutualism_antagonism/output/mutualistic_to_antagonistic/'
   
   ##############################################################################################
   # RUN LOOP FOR SIMULATIONS
@@ -59,7 +59,7 @@ run_simulations_on_HPC = function(m,a,seq,network_directory,realanta=F){
   indirecttab <- matrix(,nrow=n_sim,ncol=length(net_files))
   
   # Read parameter dataframe 
-  parameters <- read.csv('~/mutualistic_antagonistic_indirect_effects/data/parameters/mutualistic_parameters.csv', row.names = 1)
+  parameters <- read.csv('~/indirect_effects_transition_mutualism_antagonism/data/parameters/mutualistic_parameters.csv', row.names = 1)
   
   ########################################################
   # Reading network
@@ -143,11 +143,11 @@ run_simulations_on_HPC = function(m,a,seq,network_directory,realanta=F){
 }
 
 #run test for individual effect
-source('~/mutualistic_antagonistic_indirect_effects/code/fillfun.R')
-source('~/mutualistic_antagonistic_indirect_effects/code/coevolution_function.R')
+source('~/indirect_effects_transition_mutualism_antagonism/code/fillfun.R')
+source('~/indirect_effects_transition_mutualism_antagonism/code/coevolution_function.R')
 cl =  makeCluster(6)
 registerDoSNOW(cl)
-dir = "~/mutualistic_antagonistic_indirect_effects/data/networks/mutualistic/"
+dir = "~/indirect_effects_transition_mutualism_antagonism/data/networks/mutualistic/"
 result = foreach(i=seq(0,1,0.2),.inorder = TRUE) %dopar% 
   run_simulations_on_HPC(m=0.7,a=i,seq="generalist",network_directory=dir,realanta = F)
 stopCluster(cl)
