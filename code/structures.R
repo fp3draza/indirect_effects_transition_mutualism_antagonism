@@ -2,7 +2,7 @@
 library(bipartite)
 #read sd networks and ouput network in txt for MODULAR
 #MODULAR parameters: Newman index, Simulated annealing, initial temp:2, cooling temp:1.05,iteration factor:1,nullnum=100
-setwd("~/mutualistic_antagonistic_indirect_effects/data/networks/mutualistic/")
+setwd("~/indirect_effects_transition_mutualism_antagonism/data/networks/mutualistic/")
 webname<-list.files()
 weball<- list()
 for (i in 1:length(webname)){
@@ -108,14 +108,14 @@ registerDoSNOW(cl)
 webnodf = foreach(i=1:length(weball),.inorder = TRUE,.combine = rbind) %dopar% 
   runnested(weball[[i]],nullnum = 100)#100 null models for each web
 stopCluster(cl)
-save(webnodf,file="~/mutualistic_antagonistic_indirect_effects/data/network/structures/nodf.RData")
+save(webnodf,file="~/indirect_effects_transition_mutualism_antagonism/data/network/structures/nodf.RData")
 
 
 ##### nodf return
 hist((webnodf[,1]-webnodf[,2])/webnodf[,2])
 
 ###deal with MODULAR output###
-setwd("~/anta-mutual/structures/modularity")
+setwd("~/indirect_effects_transition_mutualism_antagonism/structures/modularity")
 mofile <- list.files()
 mofile<- mofile[-40]
 #things to do when the order is incorrect
@@ -190,7 +190,7 @@ for (i in 1:length(antaweb)){
 require(doSNOW)
 require(parallel)
 library(bipartite)
-load(file="~/anta-mutual/structures/antaweb.RData")
+load(file="~/indirect_effects_transition_mutualism_antagonism/structures/antaweb.RData")
 
 ddnullad<-function(MATRIX,returnp=F){
   r<-dim(MATRIX)[1]
@@ -237,11 +237,11 @@ registerDoSNOW(cl)
 antanodf = foreach(i=1:length(antaweb),.inorder = TRUE,.combine = rbind) %dopar% 
   runnested(antaweb[[i]],nullnum = 100)
 stopCluster(cl)
-save(antanodf,file="~/anta-mutual/structures/antanodf.RData")
+save(antanodf,file="~/indirect_effects_transition_mutualism_antagonism/structures/antanodf.RData")
 
 ### combine all them in the table
 ###deal with MODULAR output###
-setwd("~/anta-mutual/structures/modularity-anta")
+setwd("~/indirect_effects_transition_mutualism_antagonism/structures/modularity-anta")
 mofile <- list.files()
 mofile<- mofile[-56]
 molistanta<- list()
