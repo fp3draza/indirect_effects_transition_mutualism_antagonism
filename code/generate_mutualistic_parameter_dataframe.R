@@ -1,5 +1,5 @@
 # Generate parameter values for simulations
-network_directory <- '~/mutualistic_antagonistic_indirect_effects/data/networks/mutualistic/'
+network_directory <- '~/indirect_effects_transition_mutualism_antagonism/data/networks/mutualistic/'
 net_files <- list.files(network_directory)
 n_replica <- 100
 
@@ -71,7 +71,7 @@ generate_parameter_dataframe <- function(network_directory, net_files, n_replica
     }
   
   # Save file
-  write.csv(param_df, '~/mutualistic_antagonistic_indirect_effects/data/parameters/mutualistic_parameters.csv')
+  write.csv(param_df, '~/indirect_effects_transition_mutualism_antagonism/data/parameters/mutualistic_parameters.csv')
 }
 
 # Run function
