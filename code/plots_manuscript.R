@@ -12,7 +12,7 @@ library(lmerTest)
 # figure 2
 
 # load network data
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
                                     filter(sequence %in% c('generalist','specialist'),
@@ -29,7 +29,7 @@ trait_distribution_summary <- network_scale_results_for_plots %>%
   summarise(z_final_mean_summary = mean(z_final_mean),
             z_final_sd = mean(z_final_sd)) 
 
-full_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+full_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 full_results <- full_results[,2:ncol(full_results)]
 full_results_mutualistic <- full_results %>% na.omit() %>% 
                                         filter(network_type == 'mutualistic_network', sequence  %in% c('generalist','specialist')) %>% 
@@ -79,7 +79,7 @@ figure_2 <- ggarrange(figure_2a, figure_2b, figure_2c, figure_2d, # list of plot
 ###################
 # figure 3
 # Load data
-full_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+full_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 full_results <- full_results[,2:ncol(full_results)]
 full_results_mutualistic <- full_results %>% na.omit() %>% 
   filter(network_type == 'mutualistic_network', sequence  %in% c('generalist','specialist')) %>% 
@@ -106,9 +106,9 @@ figure_3 <- ggplot(data = full_results_mutualistic_summary, aes(x = as.factor(an
 ###################
 # figure 4 and 5
 # Load data
-species_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/species_scale_results_summary.csv')
+species_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/species_scale_results_summary.csv')
 species_scale_results <- species_scale_results[,2:ncol(species_scale_results)]
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_slim <- network_scale_results %>% select(network_name, network_matching_all_species,
                                                                network_type, anta_ratio, sequence)
