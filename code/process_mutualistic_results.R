@@ -12,7 +12,7 @@ process_mutualistic_results <- function(anta_sequence){
   df <- NULL
   
   # Network directory
-  network_directory <- '~/mutualistic_antagonistic_indirect_effects/data/networks/mutualistic/'
+  network_directory <- '~/indirect_effects_transition_mutualism_antagonism/data/networks/mutualistic/'
   net_files <- list.files(network_directory)
   
   # Loop through networks
@@ -90,7 +90,7 @@ process_mutualistic_results <- function(anta_sequence){
       for (replica in 1:n_sim) {
         
         # Read the simulation result for the current network with specific connectance, replica, strength of mutualistic selection and simulation replica
-        result_data <- read.csv(paste0('~/mutualistic_antagonistic_indirect_effects/output/mutualistic_to_antagonistic/all_networks_m_07_a_',a_char,
+        result_data <- read.csv(paste0('~/indirect_effects_transition_mutualism_antagonism/output/mutualistic_to_antagonistic/all_networks_m_07_a_',a_char,
                                        '_',anta_sequence,'/',network_name,'/',network_name,'.csv_m_07_alpha02_phi05_theta0-10_sim',
                                        replica,'_sigma10.csv'),row.names = 1)
         
@@ -193,7 +193,7 @@ process_mutualistic_results <- function(anta_sequence){
     
   }
   
-  write.csv(df, file = paste0('~/mutualistic_antagonistic_indirect_effects/results/mutualistic_results_', anta_sequence, '.csv'))
+  write.csv(df, file = paste0('~/indirect_effects_transition_mutualism_antagonism/results/mutualistic_results_', anta_sequence, '.csv'))
   return(0)
 }
 
