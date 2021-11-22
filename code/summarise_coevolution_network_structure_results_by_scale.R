@@ -3,7 +3,7 @@ require(data.table)
 require(dplyr)
 
 # Load data
-complete_data <- fread('~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+complete_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 complete_data <- complete_data[,2:ncol(complete_data)]
 
 # Summarise network scale
@@ -56,5 +56,5 @@ complete_data_species_scale_summary_final <- complete_data_species_scale_summary
                   z_final_sd = sd(z_final, na.rm = TRUE))
 
 # Store output
-write.csv(complete_data_network_scale_summary, file = '~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
-write.csv(complete_data_species_scale_summary_final, file = '~/mutualistic_antagonistic_indirect_effects/results/species_scale_results_summary.csv')
+write.csv(complete_data_network_scale_summary, file = '~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
+write.csv(complete_data_species_scale_summary_final, file = '~/indirect_effects_transition_mutualism_antagonism/results/species_scale_results_summary.csv')
