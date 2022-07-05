@@ -304,6 +304,9 @@ figure_S8 <- species_scale_results_for_plots %>% filter(anta_ratio %in% c(0,0.2,
   scale_x_continuous(trans='log10') +  geom_point(alpha = 0.3, shape = 21)  + geom_smooth(method = 'lm') + theme_minimal() + theme(plot.subtitle = element_text(hjust = 0.5), legend.position = 'bottom', text = element_text(size=15), panel.margin.x=unit(1, "lines"), legend.title=element_blank()) +
   facet_grid(guild~anta_ratio) + labs(x = '\nDegree (log)', y = expression('Species contribution to indirect effects'), subtitle = 'Fraction of antagonistic interactions') + scale_color_manual(values=color_pal) 
 
+## new figure
+ggplot(data = network_scale_results %>% filter(m == 0.7), aes(x = as.numeric(network_matching_all_species), y = as.numeric(network_indirect_effects), col = as.factor(network))) + 
+  facet_grid(~sequence) + geom_smooth() + theme_minimal() + theme(aspect.ratio = 1, text = element_text(size = 25), legend.position = 'none') + xlab('\nNetwork trait matching') + ylab('Contribution of indirect effects\n to coevolution\n') 
 
 
 
