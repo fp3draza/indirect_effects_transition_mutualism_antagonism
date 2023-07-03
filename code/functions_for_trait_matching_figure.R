@@ -155,7 +155,7 @@ run_simulation = function(a,seq, network_number, replicate){
   #critical mismatch of predator-prey interaction
   sigma=10
   # Define folder to store results
-  folder = '~/mutualistic_antagonistic_indirect_effects/output/mutualistic_to_antagonistic/'
+  folder = '~/indirect_effects_transition_mutualism_antagonism/output/mutualistic_to_antagonistic/'
   
   ##############################################################################################
   # RUN LOOP FOR SIMULATIONS
@@ -164,8 +164,8 @@ run_simulation = function(a,seq, network_number, replicate){
   
 
   # all network files names
-  network_directory <- "~/mutualistic_antagonistic_indirect_effects/data/networks/mutualistic/"
-  net_files = list.files("~/mutualistic_antagonistic_indirect_effects/data/networks/mutualistic/",recursive = TRUE)
+  network_directory <- "~/indirect_effects_transition_mutualism_antagonism/data/networks/mutualistic/"
+  net_files = list.files("~/indirect_effects_transition_mutualism_antagonism/data/networks/mutualistic/",recursive = TRUE)
   # remove file extension
   net_names = net_files
   
@@ -173,7 +173,7 @@ run_simulation = function(a,seq, network_number, replicate){
   indirecttab <- matrix(NA,nrow=n_sim,ncol=length(net_files))
   
   # Read parameter dataframe 
-  parameters <- read.csv('~/mutualistic_antagonistic_indirect_effects/data/parameters/mutualistic_parameters.csv', row.names = 1)
+  parameters <- read.csv('~/indirect_effects_transition_mutualism_antagonism/data/parameters/mutualistic_parameters.csv', row.names = 1)
   
   ########################################################
   # Reading network
