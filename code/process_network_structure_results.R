@@ -25,16 +25,17 @@ network_structure <- cbind(network_structure, degreetab)
 # Standardize nestedness and modularity
 network_structure <- network_structure %>% mutate(modularity_s = (Modularity - mmean) / (mmean),
                                                   nestedness_s = ((obs.NODF - nmean) / (nmean)) * 0.01,
-                                                  modularity_z = (Modularity - mmean) / msd,
-                                                  nestedness_z = (obs.NODF - nmean) / nsd)
+                                                  modularity_z = z_score_modularity,
+                                                  nestedness_z = z_score_nestedness)
 
 
 # Fit PCA 
 pca_observed_values <- PCA(network_structure %>% select(nsp, connectance, obs.NODF, Modularity), graph = FALSE)
-pca_observed_values_updated <- PCA(network_structure %>% select(nsp, connectance, obs_nestedness_fortuna, Modularity), graph = FALSE)
+pca_observed_values_updated <- PCA(network_structure %>% select(nsp, connectance, obs_nestedness_fortuna, Modularity) %>% mutate(nsp=log(nsp)), graph = FALSE)
 pca_mean_values <- PCA(network_structure %>% select(nsp, connectance, nmean, mmean), graph = FALSE)
 pca_standardised_values <- PCA(network_structure %>% select(nsp, connectance, nestedness_s, modularity_s), graph = FALSE)
-pca_zscore_values <- PCA(network_structure %>% select(nsp, connectance, nestedness_z, modularity_z), graph = FALSE)
+pca_zscore_values <- PCA(network_structure %>% select(nsp, connectance, nestedness_z, modularity_z) %>%
+                           mutate(nsp = log(nsp)), graph = FALSE)
 pca_size_connectance <- PCA(network_structure %>% select(nsp, connectance), graph = FALSE)
 pca_vardegree <- PCA(network_structure %>% select(nsp, connectance, obs.NODF, Modularity, vardegree), graph = FALSE)
 pca_observerd_values_mutualistic <- PCA(network_structure[1:34,] %>% select(nsp, connectance, obs.NODF, Modularity), graph = FALSE)
