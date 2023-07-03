@@ -1,8 +1,8 @@
-# The role of indirect effects in coevolution as mutualism transitions into antagonism
+# The role of indirect effects in coevolution along the mutualism-antagonism continuum
 
 ## Structure of repository 
 
-This repository contains the code and data used to perform the analyses described in "The role of indirect effects in coevolution as mutualism transitions into antagonism". The directory contains three subdirectories: 
+This repository contains the code and data used to perform the analyses described in "The role of indirect effects in coevolution along the mutualism-antagonism continuum". The directory contains three subdirectories: 
 
 * `code`
 * `data`
