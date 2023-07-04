@@ -20,10 +20,10 @@ color_pal <- c("#0072B2", "#D55E00")
 # figure S1
 
 # source functions to fit linear models
-source('~/mutualistic_antagonistic_indirect_effects/code/fit_linear_models.R')
+source('~/indirect_effects_transition_mutualism_antagonism/code/fit_linear_models.R')
 
 # load network data
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist'),
@@ -59,14 +59,12 @@ figure_S1 <- ggplot(data=modelfit_TM %>% mutate(sequence = if_else(anta_ratio %i
         plot.subtitle = element_text(size = 12, hjust = 0.5, face = 'italic')) + guides(shape="none")
 
 figure_S1
-ggsave("figure_S1.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
 
 
 ###################
 # figure S2
 
-full_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+full_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 full_results <- full_results[,2:ncol(full_results)]
 full_results_mutualistic <- full_results %>% na.omit() %>% 
   filter(network_type == 'mutualistic_network', sequence  %in% c('generalist','specialist')) %>% 
@@ -86,14 +84,12 @@ figure_S2 <- ggplot(data = summary_results_mutualistic, aes(x = network_trait_ma
   geom_smooth(se = TRUE) 
 
 figure_S2
-ggsave("figure_S2.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=200, units="mm", dpi=600)
 
 ###################
 # figure S3
 
 # Load data
-full_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+full_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 full_results <- full_results[,2:ncol(full_results)]
 full_results_mutualistic <- full_results %>% na.omit() %>% 
   filter(network_type == 'mutualistic_network', sequence  %in% c('generalist','specialist')) %>% 
@@ -117,15 +113,14 @@ figure_S3 <- ggplot(data = full_results_mutualistic_summary, aes(x = as.factor(a
   scale_color_manual(values=color_pal) + theme(aspect.ratio = 1) + ylab('Standard deviation of trait values\n after coevoluiton\n') + xlab('\nFraction of antagonistic interactions')
 
 figure_S3
-ggsave("figure_S3.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
+
 
 
 ###################
 # figure S4
 
 # load network data
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist'),
@@ -138,7 +133,7 @@ network_scale_results_for_plots <- network_scale_results_for_plots %>%
 
 
 # summarise data
-full_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/coevolution_network_structure_results.csv')
+full_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 full_results <- full_results[,2:ncol(full_results)]
 full_results_antagonistic <- full_results %>% na.omit() %>% 
   filter(network_type == 'antagonistic_network', sequence  %in% c('generalist','specialist')) %>% 
@@ -199,14 +194,13 @@ figure_S4 <- ggarrange(figure_S4a, figure_S4d, figure_S4b,figure_S4c,  # list of
                       hjust = -2)
 annotate_figure(figure_S4, top = text_grob("simulations with plant-herbivore and host-parasite networks", 
                                       face = "bold", size = 14))
-ggsave("figure_S4.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
+
 
 ###################
 # figure S5
 
 # source functions to fit linear models
-source('~/mutualistic_antagonistic_indirect_effects/code/fit_linear_models.R')
+source('~/indirect_effects_transition_mutualism_antagonism/code/fit_linear_models.R')
 
 # load network data
 network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
@@ -245,14 +239,13 @@ figure_S5 <- ggplot(data=modelfit_IE %>% mutate(sequence = if_else(anta_ratio %i
         plot.subtitle = element_text(size = 12, hjust = 0.5, face = 'italic'),
         plot.title = element_text(size = 14, hjust = 0.5, face = "bold")) + guides(shape="none")
 figure_S5
-ggsave("figure_S5.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
+
 
 ###################
 # figure S6
 
 # Read data and wrangle
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist'),
@@ -289,10 +282,6 @@ figure_S6 <- ggplot(data=modelfit_TM %>% mutate(sequence = if_else(anta_ratio %i
 
 figure_S6
 
-ggsave("figure_S6.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
-
-
 ###################
 # figure S7
 
@@ -310,16 +299,15 @@ figure_S7 <- ggplot(data = full_results_antagonistic_summary, aes(x = as.factor(
         plot.title = element_text(size = 14, hjust = 0.5, face = "bold")) 
 
 figure_S7
-ggsave("figure_S7.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
+
 
 ###################
 # figure S8
 
 # Load data
-species_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/species_scale_results_summary.csv')
+species_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/species_scale_results_summary.csv')
 species_scale_results <- species_scale_results[,2:ncol(species_scale_results)]
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_slim <- network_scale_results %>% select(network_name, network_matching_all_species,
                                                                network_type, anta_ratio, sequence)
@@ -347,8 +335,6 @@ figure_S8 <- species_scale_results_for_plots %>% filter(anta_ratio %in% c(0,0.2,
   scale_colour_manual(breaks = c("generalist first", "specialist first"),
                     values = c("#0072B2", "#D55E00", "red")) 
 figure_S8
-ggsave("figure_S8.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
 
 ## figure_S9
 figure_S9 <- species_scale_results_for_plots %>% filter(anta_ratio %in% c(0,0.2,0.4,0.6,0.8,1)) %>% ggplot(data = ., aes(x = degree, y = `indirect effects`, col = sequence))  + 
@@ -357,14 +343,12 @@ figure_S9 <- species_scale_results_for_plots %>% filter(anta_ratio %in% c(0,0.2,
   scale_colour_manual(breaks = c("generalist first", "specialist first"),
                       values = c("#0072B2", "#D55E00", "red")) 
 figure_S9
-ggsave("figure_S9.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
 
 
 # figures sensitivity analyses
 
 # load data
-sensitivity_analyses <- read.csv("~/mutualistic_antagonistic_indirect_effects/results/sensitivity_analyses.csv", row.names = 1)
+sensitivity_analyses <- read.csv("~/indirect_effects_transition_mutualism_antagonism/results/sensitivity_analyses.csv", row.names = 1)
 sensitivity_analyses <- sensitivity_analyses %>% 
   mutate(anta_ratio = if_else(
     anta_ratio ==  0, 0, if_else(
@@ -393,8 +377,7 @@ ggplot(data = sensitivity_analyses %>% dplyr::filter(sigma == 10, alpha == 0.2),
   ylab("Contribution of indirect effects\n to coevolution") +   
   scale_fill_manual(breaks = c("generalist first", "specialist first"),
                     values = c("#0072B2", "#D55E00", "red")) + labs(subtitle = expression(m~values))
-ggsave("figure_S10.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=180, units="mm", dpi=600)
+
 
 ## figure S11
 ggplot(data = sensitivity_analyses %>% dplyr::filter(sigma == 10, m == 0.7),
@@ -406,8 +389,7 @@ ggplot(data = sensitivity_analyses %>% dplyr::filter(sigma == 10, m == 0.7),
   ylab("Contribution of indirect effects\n to coevolution") +   
   scale_fill_manual(breaks = c("generalist first", "specialist first"),
                     values = c("#0072B2", "#D55E00", "red")) + labs(subtitle = expression(alpha~values))
-ggsave("figure_S11.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=180, units="mm", dpi=600)
+
 
 ## figure S12
 ggplot(data = sensitivity_analyses %>% dplyr::filter(alpha == 0.2, m == 0.7),
@@ -419,5 +401,4 @@ ggplot(data = sensitivity_analyses %>% dplyr::filter(alpha == 0.2, m == 0.7),
   ylab("Contribution of indirect effects\n to coevolution") +   
   scale_fill_manual(breaks = c("generalist first", "specialist first"),
                     values = c("#0072B2", "#D55E00", "red")) + labs(subtitle = expression(epsilon~values))
-ggsave("figure_S12.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=180, units="mm", dpi=600)
+
