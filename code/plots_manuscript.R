@@ -89,7 +89,7 @@ figure_3d <- ggplot(data = network_scale_results_for_plots,
                     values = c("#0072B2", "#D55E00", "red")) + theme(aspect.ratio = 1)
 
 # merge figures
-figure_3 <- ggarrange(figure_3b, figure_3c, figure_3d, figure_3a, # list of plots
+figure_3 <- ggarrange(figure_3a, figure_3d, figure_3b, figure_3c, # list of plots
                       labels = "AUTO", # labels
                       common.legend = T, # COMMON LEGEND
                       legend = "bottom", # legend position
