@@ -2,7 +2,7 @@
 
 ## About this respository
 
-This repository contains the code and data used to perform the analyses described in *"The role of indirect effects in coevolution along the mutualism-antagonism continuum"*. The directory contains four subdirectories:
+This repository contains the code and data used to perform the analyses described in *"The role of indirect effects in coevolution along the mutualism-antagonism continuum"*. Additional data (exceeding Github's storage policy) can be found [here](10.5281/zenodo.8131614.). The directory contains four subdirectories:
 
 -   `code`
 -   `data`
