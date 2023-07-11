@@ -1,4 +1,8 @@
-# An anta-neutral-mutualistic coevolutionary model
+# this script contains the function used to code the coevolution model. 
+# in short, the model will simulate the evolution of a single trait of each 
+# species in a community over time as a result of selection imposed by 
+# interactions and the environment. the model will return a dataframe 
+# with trait values at steady state and other metrics
 
 coevolution_modelhl = function(bi , phi, alpha, theta, init, m, epsilon, t_max,sigma){
   # Simulate coevolutionary dynamics of a mutualistic network of species interactions

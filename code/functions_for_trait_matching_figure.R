@@ -1,12 +1,17 @@
-# plot t-matrix & trait matching
+# this script runs a simplified version of the coevolution function. It performs the 
+# the simulation in the same way as "coevolution_function.R" but returns a simplified version
+# of the output. This function is used to produce figure 6 in the main text, in which the output
+# of the model is visualised for a given network. 
+
+# load packages
 library(reshape2)
 require(paletteer)
 require(forcats)
 
-# colours
+# define colours for visualistion
 pal_two <-  paletteer_d("rcartocolor::OrYel")
 
-# coevolution model functions
+# coevolution model function
 coevolution_modelhl = function(bi , phi, alpha, theta, init, m, epsilon, t_max,sigma){
   # Simulate coevolutionary dynamics of a mutualistic network of species interactions
   
@@ -114,18 +119,11 @@ coevolution_modelhl = function(bi , phi, alpha, theta, init, m, epsilon, t_max,s
     }
   }
   
-  # return a matrix with trait values over time
-  #z.indi <- rbind(theta = theta, init = init, z_final = z_final, indirect=indirect,  indirect_col_sums=indirect_col_sums,
-  #                                    indirect_row_sums=indirect_row_sums,  indirect_col_row_sums=indirect_col_row_sums,
-  #                                     indirect_col_sums_over_ind = indirect_col_sums_over_ind, indirect_row_sums_over_ind = indirect_row_sums_over_ind,
-  #                                    indirect_col_row_sums_over_ind = indirect_col_row_sums_over_ind, time_to_equi = rep(current_time, length(indirect_col_sums)),
-  #                                    rate = rep(rate, length(indirect_col_sums)))
   
   # return tmatrix and trait matching
   return_list <- list(dir_ind, matching)
   
   # return
-  #return(z.indi)
   return(return_list)
 }
 
@@ -238,7 +236,7 @@ run_simulation = function(a,seq, network_number, replicate){
 }
 
 
-###### function used to FILL -1 link in species with specified sequence accordance#####
+# function to flip interactions from mutualism to antagonism (same as fillfun.R)
 fillfun <- function(mat,degreetab,anum,decreasing){
   degreeord <-order(degreetab$value,decreasing = decreasing)
   degreetab <- degreetab[degreeord,]

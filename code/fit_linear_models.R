@@ -1,6 +1,6 @@
 # this function fits a linear model to study the relationship
 # between either indirect effects or trait matching and 
-# each network descriptor. the funciton returns a data frame
+# each network descriptor. the functions returns a data frame
 # containing the estimates of each model
 
 model_fit <- function(data_results, flip_sequence, response_variable){

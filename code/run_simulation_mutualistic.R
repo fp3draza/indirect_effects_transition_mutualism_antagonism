@@ -1,6 +1,11 @@
+# this script runs the coevolutionary model on a set of mutualistic networks under
+# different ratios of mutualists-to-antagonists. It will store the output of each 
+# simulation to a file. 
+# clean up
 rm(list=ls())
-require(doSNOW)
-require(parallel)
+# library
+library(doSNOW)
+library(parallel)
 library(bipartite)
 
 run_simulations_on_HPC = function(m,a,seq,network_directory,realanta=F){
@@ -48,7 +53,7 @@ run_simulations_on_HPC = function(m,a,seq,network_directory,realanta=F){
   
   ########################################################
   # Create folder to store results
-  dir.create(path = paste(folder,"all_networks","_m_",m_char,"_a_",a_char,"_",seq,sep=""))
+  dir.create(path = paste(folder,"all_networks","_m_",m_char,"_a_",a_char,"_",seq,sep=""), recursive = TRUE, showWarnings = FALSE)
   
   # all network files names
   net_files = list.files(network_directory,recursive = TRUE)
@@ -67,7 +72,7 @@ run_simulations_on_HPC = function(m,a,seq,network_directory,realanta=F){
   for (i in 1:length(net_files)) {#
     
     # create directory to store results from current network
-    dir.create(path = paste(folder, "all_networks", "_m_", m_char, "_a_",a_char,"_",seq,"/", tools::file_path_sans_ext(net_names[i]), sep = ""))
+    dir.create(path = paste(folder, "all_networks", "_m_", m_char, "_a_",a_char,"_",seq,"/", tools::file_path_sans_ext(net_names[i]), sep = ""), showWarnings = FALSE)
     print(net_files[i])
     mat = as.matrix(read.csv(paste(network_directory,net_files[i],sep=""),row.names =  1))
     mat <- bipartite::empty(mat)
@@ -131,7 +136,8 @@ run_simulations_on_HPC = function(m,a,seq,network_directory,realanta=F){
       z = coevolution_modelhl(bi=mat, phi = phi, alpha = alpha, theta = theta, init = init, m = m, epsilon = epsilon, t_max = t_max,sigma = sigma)
       # build data frames
       colnames(z) = c(paste("R",1:n_row,sep = ""), paste("C", 1:n_col, sep = ""))
-      
+      # create folder to store output
+      dir.create(paste0(folder,"all_networks","_m_",m_char, "_a_",a_char,"_",seq,"/",tools::file_path_sans_ext(net_names[i])), showWarnings = FALSE)
       # save species inital and final trait values
       write.csv(z, file = paste(folder,"all_networks","_m_",m_char, "_a_",a_char,"_",seq,"/",tools::file_path_sans_ext(net_names[i]),"/",net_names[i],
                                 "_m_",m_char,"_alpha",alpha_char,"_phi",phi_car,"_theta",theta_min_char
@@ -141,13 +147,27 @@ run_simulations_on_HPC = function(m,a,seq,network_directory,realanta=F){
     }
   }
 }
-
-#run test for individual effect
+# source necessary functions
 source('~/indirect_effects_transition_mutualism_antagonism/code/fillfun.R')
 source('~/indirect_effects_transition_mutualism_antagonism/code/coevolution_function.R')
-cl =  makeCluster(6)
-registerDoSNOW(cl)
+
+# create temporary data frame for all parameter combinations
+strategies <- rep(c('generalist', 'specialist'), each = 6)
+fractions <- rep(seq(0,1,0.2), 2)
+parameter_df <- data.frame(strategies, fractions)
+
+# set directory where networks are stored
 dir = "~/indirect_effects_transition_mutualism_antagonism/data/networks/mutualistic/"
-result = foreach(i=seq(0,1,0.2),.inorder = TRUE) %dopar% 
-  run_simulations_on_HPC(m=0.7,a=i,seq="generalist",network_directory=dir,realanta = F)
+
+# Run simulations for each strategy and each fraction in parallel 
+# initialise cluster for parallel processing
+cl =  makeCluster(nrow(parameter_df))
+registerDoSNOW(cl)
+# run the post-processing of raw data
+result = foreach(i=1:nrow(parameter_df)) %dopar% 
+  run_simulations_on_HPC(m = 0.7, a = parameter_df$fractions[i], seq = parameter_df$strategies[i],
+                         network_directory = dir, realanta = F)
+# stop the cluster
 stopCluster(cl)
+
+

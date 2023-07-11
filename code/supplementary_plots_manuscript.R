@@ -1,9 +1,10 @@
-# supp manuscript figures
-#clean up
+# this script generates the figures shown in the supplementary material of the manuscript
+
+# clean up
 rm(list=ls())
 dev.off()
 
-# requires
+# load packages
 require(ggplot2)
 require(data.table)
 require(dplyr)
@@ -13,8 +14,6 @@ library(lmerTest)
 
 # define color palette
 color_pal <- c("#0072B2", "#D55E00")
-
-
 
 ###################
 # figure S1
@@ -63,7 +62,7 @@ figure_S1
 
 ###################
 # figure S2
-
+ 
 full_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')
 full_results <- full_results[,2:ncol(full_results)]
 full_results_mutualistic <- full_results %>% na.omit() %>% 
@@ -194,7 +193,7 @@ figure_S4 <- ggarrange(figure_S4a, figure_S4d, figure_S4b,figure_S4c,  # list of
                       hjust = -2)
 annotate_figure(figure_S4, top = text_grob("simulations with plant-herbivore and host-parasite networks", 
                                       face = "bold", size = 14))
-
+figure_S4
 
 ###################
 # figure S5
@@ -203,7 +202,7 @@ annotate_figure(figure_S4, top = text_grob("simulations with plant-herbivore and
 source('~/indirect_effects_transition_mutualism_antagonism/code/fit_linear_models.R')
 
 # load network data
-network_scale_results <- fread('~/mutualistic_antagonistic_indirect_effects/results/network_scale_results_summary.csv')
+network_scale_results <- fread('~/indirect_effects_transition_mutualism_antagonism/results/network_scale_results_summary.csv')
 network_scale_results <- network_scale_results[,2:ncol(network_scale_results)]
 network_scale_results_for_plots <- network_scale_results %>% 
   filter(sequence %in% c('generalist','specialist'),
@@ -336,7 +335,9 @@ figure_S8 <- species_scale_results_for_plots %>% filter(anta_ratio %in% c(0,0.2,
                     values = c("#0072B2", "#D55E00", "red")) 
 figure_S8
 
-## figure_S9
+###################
+# figure S9
+
 figure_S9 <- species_scale_results_for_plots %>% filter(anta_ratio %in% c(0,0.2,0.4,0.6,0.8,1)) %>% ggplot(data = ., aes(x = degree, y = `indirect effects`, col = sequence))  + 
   scale_x_continuous(trans='log10') +  geom_point(alpha = 0.3, shape = 21)  + geom_smooth(method = 'lm') + theme_minimal() + theme(plot.subtitle = element_text(hjust = 0.5), legend.position = 'bottom', text = element_text(size=12), panel.margin.x=unit(1, "lines"), legend.title=element_blank()) +
   facet_grid(guild~anta_ratio) + labs(x = '\nDegree (log)', y = expression('Species contribution to indirect effects'), subtitle = 'Fraction of antagonistic interactions')  + 
@@ -367,7 +368,8 @@ sensitivity_analyses <- sensitivity_analyses %>%
   )
 
 
-## figure S10
+###################
+# figure S10
 ggplot(data = sensitivity_analyses %>% dplyr::filter(sigma == 10, alpha == 0.2), 
        aes(x = as.factor(anta_ratio), y = indirect_effects, fill = strategy)) +
   geom_boxplot(alpha = 0.6) + facet_grid(~m) + xlab('\nFraction of antagonistic interactions') + 
@@ -379,7 +381,8 @@ ggplot(data = sensitivity_analyses %>% dplyr::filter(sigma == 10, alpha == 0.2),
                     values = c("#0072B2", "#D55E00", "red")) + labs(subtitle = expression(m~values))
 
 
-## figure S11
+###################
+# figure S11
 ggplot(data = sensitivity_analyses %>% dplyr::filter(sigma == 10, m == 0.7),
        aes(x = as.factor(anta_ratio), y = indirect_effects, fill = strategy)) +
   geom_boxplot(alpha = 0.6) + facet_grid(~alpha) + xlab('\nFraction of antagonistic interactions') + 
@@ -391,7 +394,8 @@ ggplot(data = sensitivity_analyses %>% dplyr::filter(sigma == 10, m == 0.7),
                     values = c("#0072B2", "#D55E00", "red")) + labs(subtitle = expression(alpha~values))
 
 
-## figure S12
+###################
+# figure S12
 ggplot(data = sensitivity_analyses %>% dplyr::filter(alpha == 0.2, m == 0.7),
        aes(x = as.factor(anta_ratio), y = indirect_effects, fill = strategy)) +
   geom_boxplot(alpha = 0.6) + facet_grid(~sigma) + xlab('\nFraction of antagonistic interactions') + 

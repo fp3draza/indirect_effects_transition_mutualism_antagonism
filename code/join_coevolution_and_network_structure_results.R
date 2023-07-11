@@ -1,36 +1,35 @@
-# Requires
+# This scripts load all post-processed results and merges them into a single file.
+
+# clean up
+rm(list=ls())
+
+# Load packages
 require(dplyr)
 require(data.table)
+require(tidyverse)
 
-# Load processed data
-specialist_antagonistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/antagonistic_results_specialist.csv')
-specialist_antagonistic_data <- specialist_antagonistic_data[,2:ncol(specialist_antagonistic_data)]
-generalist_antagonistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/antagonistic_results_generalist.csv')
-generalist_antagonistic_data <- generalist_antagonistic_data[,2:ncol(generalist_antagonistic_data)]
-random_antagonistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/antagonistic_results_random.csv')
-random_antagonistic_data <- random_antagonistic_data[,2:ncol(random_antagonistic_data)]
-specialist_mutualistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/mutualistic_results_specialist.csv')
-specialist_mutualistic_data <- specialist_mutualistic_data[,2:ncol(specialist_mutualistic_data)]
-generalist_mutualistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/mutualistic_results_generalist.csv')
-generalist_mutualistic_data <- generalist_mutualistic_data[,2:ncol(generalist_mutualistic_data)]
-random_mutualistic_data <- fread('~/indirect_effects_transition_mutualism_antagonism/results/mutualistic_results_random.csv')
-random_mutualistic_data <- random_mutualistic_data[,2:ncol(random_mutualistic_data)]
+# Define directory where data is stored 
+dir_data <- '~/indirect_effects_transition_mutualism_antagonism/results/'
 
-# Bind data
-complete_data <- rbind(specialist_antagonistic_data, generalist_antagonistic_data, random_antagonistic_data,
-                       specialist_mutualistic_data, generalist_mutualistic_data, random_mutualistic_data)
+# read all files corresponding to the output of the coevolution simulations
+list_mutualistic <- list.files(path = dir_data, pattern = "mutualistic*", full.names = TRUE)
+list_antagonistic <- list.files(path = dir_data, pattern = "antagonistic*", full.names = TRUE)
+list_full <- c(list_mutualistic, list_antagonistic)
+complete_data <- list_full %>% 
+  map_df(~fread(.))
+
+# remove first column
+complete_data <- complete_data[ , 2:ncol(complete_data)]
 
 # Change column names
 colnames(complete_data) <- c('network_name', 'network_type', 'anta_ratio', 'sequence', 
-                             'replica', 'specialist_or_interacts_with_one', 'is_specialist',
-                             'interacts_with_specialist', 'network_indirect_effects', 'species_indirect_effects_row_sum',
-                             'species_indirect_effects_row_sum_over_ind', 'species_indirect_effects_col_sum',
-                             'species_indirect_effects_col_sum_over_ind', 'time_to_equilibrium',
-                             'rate_of_adaptive_change', 'degree', 'sp_names', 'species_matching_all_species_include_diagonal',
-                             'species_matching_all_species_no_diagonal', 'species_matching_only_interactions', 
-                             'species_trait_change', 'species_theta_matching', 'network_trait_change', 'network_theta_change',
-                             'network_matching_all_species_include_diagonal', 'network_matching_all_species_no_diagonal',
-                             'network_matching_only_interactions','z_final','z_initial','z_theta')
+                             'replica', 'network_indirect_effects', 'time_to_equilibrium',
+                             'rate_of_adaptive_change', 'degree', 'sp_names',
+                             'species_matching_all_species_no_diagonal', 'species_matching_only_interactions',
+                             'species_trait_change', 'species_theta_matching', 
+                             'species_indirect_effects_col_sum', 'network_trait_change',
+                             'network_theta_change', 'network_matching_all_species_no_diagonal',
+                             'network_matching_only_interactions', 'z_final','z_initial','z_theta')
 
 
 # Load network structure data
@@ -39,6 +38,9 @@ network_structure_data <- network_structure_data[,2:ncol(network_structure_data)
 
 # JOIN STATEMENT
 complete_data <- complete_data %>% left_join(network_structure_data)
+
+# Create directory where data will be stored
+dir.create('~/indirect_effects_transition_mutualism_antagonism/results/', showWarnings = FALSE)
 
 # Write file
 write.csv(complete_data, '~/indirect_effects_transition_mutualism_antagonism/results/coevolution_network_structure_results.csv')

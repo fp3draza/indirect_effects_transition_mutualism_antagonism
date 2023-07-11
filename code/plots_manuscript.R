@@ -1,6 +1,6 @@
-# manuscript figures
+# this script generates the figures shown in the main text of the manuscript
 
-# requires
+# load packages
 require(ggplot2)
 require(data.table)
 require(dplyr)
@@ -22,6 +22,8 @@ network_scale_results_for_plots <- network_scale_results %>%
                                     network_type == 'mutualistic_network') %>% 
                                     mutate(sequence = if_else(sequence == 'generalist', "generalist first", "specialist first"))
 
+# modify sequence information to only show one treatment when 
+# fully mutualistic or antagonistic
 network_scale_results_for_plots <- network_scale_results_for_plots %>% 
   mutate(
     sequence = ifelse(anta_ratio %in% c(0,1), 'a', sequence)
@@ -173,15 +175,13 @@ figure_5 <- ggplot(data = data_figure_five, aes(x = as.numeric(network_matching_
   xlab('\nNetwork trait matching') + ylab('Contribution of indirect effects\n to coevolution\n') +
   scale_color_gradientn(colours = gradient_colors(6)) + labs(subtitle = 'fraction of antagonistic interactions')
 figure_5
-ggsave("figure_5.pdf", path="~/mutualistic_antagonistic_indirect_effects/figures/amnat_revision/",
-       width=180, height=220, units="mm", dpi=600)
                                                          
 
 ####################
 
 # figure 6
 
-# source
+# source functions for running the coevolution model once on a particular network
 source("~/indirect_effects_transition_mutualism_antagonism/code/functions_for_trait_matching_figure.R")
 
 # colours
@@ -283,7 +283,7 @@ df <- df %>%
     trait_matching = ifelse(true_is_lower == 1, trait_matching, NA),
     interaction = ifelse(true_is_lower == 1, interaction, NA))
 
-# plots
+# plot
 figure_6 <- ggplot(data = df, aes(x = fct_inorder(sp1), y = fct_inorder(sp2), fill = trait_matching))  +
   geom_tile(alpha = 0.8) + facet_grid(~strategy) +  
   scale_fill_gradientn(colours = pal_two, na.value="#93B9ACFF") +

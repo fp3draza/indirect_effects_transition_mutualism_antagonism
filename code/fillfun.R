@@ -1,3 +1,6 @@
+# this script converts the mutualistic interactions of a network 
+# into antagonistic interactions based on the degree of the species. 
+
 ###### function used to FILL -1 link in species with specified sequence accordance#####
 fillfun <- function(mat,degreetab,anum,decreasing){
   degreeord <-order(degreetab$value,decreasing = decreasing)
